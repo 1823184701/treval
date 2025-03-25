@@ -56,6 +56,31 @@ export const constantRoutes = [
     component: () => import('@/views/error/404'),
     hidden: true
   },
+  // 修正后的welcome路由配置
+  {
+    path: '/treval/welcome',
+    component: () => import('@/views/treval/welcom/index.vue'),
+    hidden: true,
+    meta: {title:'旅游云南', requiresAuth: false } // 明确声明不需要认证
+  },
+  {
+    path: '/treval/intro',
+    component: () => import('@/views/treval/introduce/index.vue'),
+    hidden: true,
+    meta: {title:'旅游云南', requiresAuth: false } // 明确声明不需要认证
+  },
+  {
+    path: '/treval/commend',
+    component: () => import('@/views/treval/commend/index.vue'),
+    hidden: true,
+    meta: {title:'旅游云南', requiresAuth: false } // 明确声明不需要认证
+  },
+  {
+    path: '/treval/search',
+    component: () => import('@/views/treval/search/index.vue'),
+    hidden: true,
+    meta: {title:'旅游云南', requiresAuth: false } // 明确声明不需要认证
+  },
   {
     path: '/401',
     component: () => import('@/views/error/401'),

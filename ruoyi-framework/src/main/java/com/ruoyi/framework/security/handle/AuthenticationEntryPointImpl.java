@@ -15,7 +15,7 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 认证失败处理类 返回未授权
- * 
+ *
  * @author ruoyi
  */
 @Component
@@ -27,8 +27,11 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, S
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
             throws IOException
     {
+        // 设置返回状态码为未授权
         int code = HttpStatus.UNAUTHORIZED;
+        // 设置返回信息为请求访问的URI和认证失败
         String msg = StringUtils.format("请求访问：{}，认证失败，无法访问系统资源", request.getRequestURI());
+        // 将返回信息转换为JSON格式并返回给客户端
         ServletUtils.renderString(response, JSON.toJSONString(AjaxResult.error(code, msg)));
     }
 }

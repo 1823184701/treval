@@ -9,13 +9,26 @@ import { isRelogin } from '@/utils/request'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/register']
+const whiteList = [
+  '/login', 
+  '/register',
+  '/treval/welcome',
+  '/treval/intro',
+  '/treval/commend',
+  '/treval/search',
+]
 
 const isWhiteList = (path) => {
-  return whiteList.some(pattern => isPathMatch(pattern, path))
+  // 添加调试语句检查路径匹配情况
+  return whiteList.some(pattern => {
+    const isMatch = isPathMatch(pattern, path)
+    console.log(`[Permission] Checking ${path} against ${pattern}: ${isMatch}`)
+    return isMatch
+  })
 }
 
 router.beforeEach((to, from, next) => {
+  console.log('[路由守卫] 当前路径:', to.path, '匹配白名单:', whiteList)
   NProgress.start()
   if (getToken()) {
     to.meta.title && store.dispatch('settings/setTitle', to.meta.title)
